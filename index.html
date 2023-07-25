@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criando cruds</title>
+</head>
+
+<body style="background-color: gray;">
+    <h1 style="text-align: center; color: #fff;">Criando cruds</h1>
+
+    <script>
+
+        const miniTwiter = {
+            usuarios: [
+                {
+                    username: 'joaopaulo'
+                }
+            ],
+            posts: [
+                {
+                    id: 1,
+                    owner: 'joaopaulo',
+                    content: 'Meu primeiro tweet'
+                }
+            ]
+        }
+
+        //CREATE
+        function criaPost({ owner, content }) {
+            miniTwiter.posts.push({
+                id: miniTwiter.posts.length + 1,
+                owner: owner,
+                content: content
+            })
+        }
+        criaPost({ owner: 'joaopaulo', content: 'Meu segundo tweet.' })
+        criaPost({ owner: 'joaopaulo', content: 'Meu terceiro tweet.' })
+
+
+        //READ
+        function pegaPosts() {
+            return miniTwiter.posts
+            //Não faz sentido aqui
+
+            // for(let cont = 0; cont <= miniTwiter.posts.length;cont++){
+            //     console.log(miniTwiter.posts[cont].id, miniTwiter.posts[cont].owner, miniTwiter.posts[cont].content.toUpperCase())
+
+            // }
+        }
+
+
+        //UPDATE
+        function atualizaContentPost(id, novoConteudo) {
+            const postQueVaiSerAtualizado = pegaPosts().find((posts) => {
+                return posts.id === id
+            })
+            postQueVaiSerAtualizado.content = novoConteudo
+
+        }
+        atualizaContentPost(2, 'Novo conteúdo do tweet')
+
+        //DELETE
+
+        function apagaPost(id) {
+
+            const listaDePostsAtualizada = pegaPosts().filter((postAtual) => {
+                return postAtual.id !== id
+            })
+
+
+            miniTwiter.posts = listaDePostsAtualizada
+        }
+        apagaPost(2)
+        console.log(miniTwiter.posts)
+
+
+
+    </script>
+</body>
+
+</html>
